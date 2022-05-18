@@ -1,12 +1,21 @@
 let str = "";
+let guesses = new Set();
+
 function guessCheck(){
     str = document.getElementById('guess').value.toLowerCase();
     if(isLetter(str)){
-        document.getElementById("last-guess").innerHTML = "Last Guess: " + str;
-        document.getElementById("invalid-input").innerHTML = "";
+        if(guesses.has(str)){
+            document.getElementById("invalid").innerHTML = "You already guessed that one! Try again.";
+        }
+        else{
+            document.getElementById("last-guess").innerHTML = "Last Guess: " + str;
+            document.getElementById("invalid").innerHTML = "";
+            document.getElementById("guesses").innerHTML += str;
+            guesses.add(str);
+        }
     }
     else{
-        document.getElementById("invalid-input").innerHTML = "Invalid input!<br>Please enter a letter!";
+        document.getElementById("invalid").innerHTML = "Invalid input!<br>Please enter a letter!";
     }
     document.getElementById("guess").value = "";
 }
